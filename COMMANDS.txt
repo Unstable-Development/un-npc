@@ -1,0 +1,80 @@
+======================================
+PRELUDE NPC - ADMIN COMMAND REFERENCE
+======================================
+
+🎯 RECOMMENDED: USE THE CONTROL PANEL
+--------------------------------------
+/npcpanel                   - Open tablet-style visual control panel (Admin)
+                              All commands below can be done through the UI!
+
+🆕 NEW: IN-GAME BUILDERS
+--------------------------
+/createzone                 - Start in-game zone builder (Admin)
+                              Create guard zones visually with markers
+/createroute                - Start in-game route builder (Admin)
+                              Create patrol routes by driving/walking
+
+HUNTER COMMANDS (Everyone)
+--------------------------
+/chaseme [level] [count]    - Spawn hunters (level:1-5, count:1-10)
+/chaseoff                   - Remove all hunters
+
+GUARD ZONE COMMANDS (Admin)
+----------------------------
+/spawnguards [zone]         - Spawn guards in zone
+/clearguards [zone/all]     - Clear guards from zone
+/listzones                  - List all guard zones
+/toggleguardzones           - Toggle guard zones on/off
+
+PATROL COMMANDS (Admin)
+-----------------------
+/spawnpatrol [route]        - Spawn patrol on route
+/clearpatrols               - Clear all patrols
+/listpatrols                - List all patrol routes
+
+BODYGUARD COMMANDS (Admin)
+--------------------------
+/givebodyguard [id] [tier]  - Give bodyguard to player (tier:1-3)
+/clearbodyguards [id]       - Remove bodyguards from player
+
+PRE-CONFIGURED ZONES
+--------------------
+1. Cayo Perico (15 guards, needs creampie)
+2. Fort Zancudo (20 guards, needs military_id)
+3. Grove Street Territory (8 guards, needs gang_bandana)
+
+PRE-CONFIGURED PATROLS
+----------------------
+1. Cayo Perico Perimeter
+2. Fort Zancudo Patrol
+
+🆕 CUSTOM ZONES & ROUTES
+------------------------
+Create your own zones and routes in-game!
+- Use /createzone to build guard zones visually
+- Use /createroute to create patrol routes by driving
+- Manage from /npcpanel with create/delete buttons
+- Custom content saved to database
+
+BODYGUARD TIERS
+---------------
+Tier 1: Basic Security ($5,000)
+Tier 2: Professional Guard ($15,000)
+Tier 3: Elite Mercenary ($35,000)
+
+HIRE LOCATIONS
+--------------
+- Downtown Security: -1082.82, -247.23, 37.76
+- Sandy Shores Mercs: 1961.95, 3748.45, 32.34
+- Paleto Bay Protection: -104.89, 6324.56, 31.52
+
+QUICK EXAMPLES
+--------------
+/chaseme 3 2               → Spawn 2 level-3 hunters
+/spawnguards 1             → Spawn Cayo Perico guards
+/spawnguards cayo          → Same as above (by name)
+/clearguards all           → Clear all guard zones
+/spawnpatrol 1             → Spawn Cayo patrol
+/givebodyguard 1 3         → Give player ID 1 a tier-3 bodyguard
+/clearbodyguards 1         → Remove all bodyguards from player ID 1
+

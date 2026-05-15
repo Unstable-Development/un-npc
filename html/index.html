@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NPC Control Panel</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="tablet-container" id="tablet">
+        <div class="tablet-header">
+            <div class="header-left">
+                <i class="fas fa-shield-alt"></i>
+                <h1>NPC Control Panel</h1>
+            </div>
+            <div class="header-right">
+                <button class="close-btn" id="closeBtn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="tablet-nav">
+            <button class="nav-btn active" data-tab="guards">
+                <i class="fas fa-user-shield"></i>
+                <span>Guards</span>
+            </button>
+            <button class="nav-btn" data-tab="patrols">
+                <i class="fas fa-car"></i>
+                <span>Patrols</span>
+            </button>
+            <button class="nav-btn" data-tab="scenarios">
+                <i class="fas fa-theater-masks"></i>
+                <span>Scenarios</span>
+            </button>
+            <button class="nav-btn" data-tab="bodyguards">
+                <i class="fas fa-user-tie"></i>
+                <span>Bodyguards</span>
+            </button>
+            <button class="nav-btn" data-tab="hunters">
+                <i class="fas fa-crosshairs"></i>
+                <span>Hunters</span>
+            </button>
+            <button class="nav-btn" data-tab="street-npcs">
+                <i class="fas fa-fist-raised"></i>
+                <span>Street NPCs</span>
+            </button>
+            <button class="nav-btn" data-tab="quickactions">
+                <i class="fas fa-bolt"></i>
+                <span>Quick</span>
+            </button>
+        </div>
+
+        <div class="tablet-content">
+            <!-- Guard Zones Tab -->
+            <div class="tab-panel active" id="guards-tab">
+                <div class="panel-header">
+                    <h2>Guard Zone Management</h2>
+                    <div class="header-actions">
+                        <button class="action-btn primary" id="createZoneBtn">
+                            <i class="fas fa-plus-circle"></i> Create Zone
+                        </button>
+                        <div class="toggle-container">
+                            <label class="toggle-label">Global Guard Zones:</label>
+                            <label class="switch">
+                                <input type="checkbox" id="toggleGuardZones" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="zones-list" id="zonesList">
+                    <!-- Dynamically populated -->
+                </div>
+            </div>
+
+            <!-- Patrols Tab -->
+            <div class="tab-panel" id="patrols-tab">
+                <div class="panel-header">
+                    <h2>Patrol Management</h2>
+                    <div class="header-actions">
+                        <button class="action-btn primary" id="createRouteBtn">
+                            <i class="fas fa-plus-circle"></i> Create Route
+                        </button>
+                        <button class="action-btn danger" id="clearAllPatrols">
+                            <i class="fas fa-trash"></i> Clear All Patrols
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="patrols-list" id="patrolsList">
+                    <!-- Dynamically populated -->
+                </div>
+            </div>
+
+            <!-- Bodyguards Tab -->
+            <div class="tab-panel" id="bodyguards-tab">
+                <div class="panel-header">
+                    <h2>Bodyguard Management</h2>
+                </div>
+                
+                <div class="bodyguard-tiers" id="bodyguardTiers">
+                    <!-- Dynamically populated -->
+                </div>
+
+                <div class="player-bodyguards">
+                    <h3>Manage Player Bodyguards</h3>
+                    <div class="input-group">
+                        <input type="number" id="targetPlayerId" placeholder="Player ID" class="input-field">
+                        <select id="bodyguardTier" class="select-field">
+                            <option value="1">Tier 1 - Basic Security</option>
+                            <option value="2">Tier 2 - Professional Guard</option>
+                            <option value="3">Tier 3 - Elite Mercenary</option>
+                        </select>
+                    </div>
+                    <div class="button-group">
+                        <button class="action-btn success" id="giveBodyguard">
+                            <i class="fas fa-plus"></i> Give Bodyguard
+                        </button>
+                        <button class="action-btn danger" id="clearBodyguards">
+                            <i class="fas fa-user-slash"></i> Clear Bodyguards
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hunters Tab -->
+            <div class="tab-panel" id="hunters-tab">
+                <div class="panel-header">
+                    <h2>Hunter System</h2>
+                    <button class="action-btn danger" id="clearHunters">
+                        <i class="fas fa-ban"></i> Clear All Hunters
+                    </button>
+                </div>
+
+                <div class="hunter-controls">
+                    <h3>Spawn Hunters</h3>
+                    <div class="hunter-options">
+                        <div class="option-group">
+                            <label>Target Player ID</label>
+                            <input type="number" id="hunterTargetId" placeholder="Player ID (0 = yourself)" class="input-field" value="0">
+                        </div>
+                        <div class="option-group">
+                            <label>Hunter Type</label>
+                            <select id="hunterType" class="select-field">
+                                <option value="vehicle">Vehicle Hunter</option>
+                                <option value="pedestrian">Pedestrian Hunter</option>
+                            </select>
+                        </div>
+                        <div class="option-group">
+                            <label>Hunter Level (1-5)</label>
+                            <input type="range" id="hunterLevel" min="1" max="5" value="1" class="range-slider">
+                            <span class="range-value" id="hunterLevelValue">1</span>
+                        </div>
+                        <div class="option-group">
+                            <label>Number of Hunters (1-10)</label>
+                            <input type="range" id="hunterCount" min="1" max="10" value="1" class="range-slider">
+                            <span class="range-value" id="hunterCountValue">1</span>
+                        </div>
+                    </div>
+                    
+                    <div class="hunter-levels">
+                        <div class="level-card">
+                            <div class="level-badge">Lvl 1</div>
+                            <p>Vehicle: Asea</p>
+                            <p>Speed: 40 km/h</p>
+                        </div>
+                        <div class="level-card">
+                            <div class="level-badge">Lvl 2</div>
+                            <p>Vehicle: Seminole</p>
+                            <p>Speed: 55 km/h</p>
+                        </div>
+                        <div class="level-card">
+                            <div class="level-badge">Lvl 3</div>
+                            <p>Vehicle: Banshee</p>
+                            <p>Speed: 110 km/h</p>
+                        </div>
+                        <div class="level-card">
+                            <div class="level-badge">Lvl 4</div>
+                            <p>Vehicle: Turismo R</p>
+                            <p>Speed: 90 km/h</p>
+                        </div>
+                        <div class="level-card">
+                            <div class="level-badge">Lvl 5</div>
+                            <p>Vehicle: Osiris</p>
+                            <p>Speed: 110 km/h</p>
+                        </div>
+                    </div>
+
+                    <button class="action-btn primary large" id="spawnHunters">
+                        <i class="fas fa-crosshairs"></i> Spawn Hunters
+                    </button>
+                </div>
+            </div>
+
+            <!-- Scenarios Tab -->
+            <div class="tab-panel" id="scenarios-tab">
+                <div class="panel-header">
+                    <h2>Scenario Templates</h2>
+                    <p class="subtitle">Quick-deploy pre-made scenarios for events</p>
+                </div>
+                
+                <div class="scenarios-list" id="scenariosList">
+                    <!-- Dynamically populated -->
+                </div>
+            </div>
+
+            <!-- Street NPCs Tab -->
+            <div class="tab-panel" id="street-npcs-tab">
+                <div class="panel-header">
+                    <h2>Street NPCs</h2>
+                    <div class="header-actions">
+                        <button class="action-btn success" id="spawnAllAggressiveZones">
+                            <i class="fas fa-plus-circle"></i> Spawn All
+                        </button>
+                        <button class="action-btn danger" id="clearAllAggressiveZones">
+                            <i class="fas fa-trash"></i> Clear All
+                        </button>
+                    </div>
+                </div>
+                <p class="street-npc-subtitle">Melee-only brawlers that auto-attack players. Spawn automatically on server start.</p>
+                <div class="aggressive-zones-list" id="aggressiveZonesList">
+                    <!-- Dynamically populated -->
+                </div>
+            </div>
+
+            <!-- Quick Actions Tab -->
+            <div class="tab-panel" id="quickactions-tab">
+                <div class="panel-header">
+                    <h2>Quick Actions</h2>
+                    <p class="subtitle">One-click admin controls</p>
+                </div>
+                
+                <div class="quick-actions-grid">
+                    <button class="quick-action-btn spawn-all" id="spawnAllGuards">
+                        <i class="fas fa-users"></i>
+                        <span>Spawn All Guards</span>
+                        <small>Activate all guard zones</small>
+                    </button>
+                    
+                    <button class="quick-action-btn clear-all" id="clearEverything">
+                        <i class="fas fa-broom"></i>
+                        <span>Clear Everything</span>
+                        <small>Remove all NPCs</small>
+                    </button>
+                    
+                    <button class="quick-action-btn lockdown" id="emergencyLockdown">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Emergency Lockdown</span>
+                        <small>Activate critical zones</small>
+                    </button>
+                    
+                    <button class="quick-action-btn performance" id="performanceCheck">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Performance Check</span>
+                        <small>View NPC stats</small>
+                    </button>
+                </div>
+
+                <div class="settings-section">
+                    <h3>Warning System</h3>
+                    <div class="setting-item">
+                        <label class="toggle-label">Player Warnings Enabled:</label>
+                        <label class="switch">
+                            <input type="checkbox" id="toggleWarnings" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <p class="setting-description">
+                        Warns players when approaching restricted zones
+                    </p>
+                </div>
+
+                <div class="settings-section">
+                    <h3>Guard AI Behaviors</h3>
+                    <div class="setting-item">
+                        <label class="toggle-label">Enhanced AI Enabled:</label>
+                        <label class="switch">
+                            <input type="checkbox" id="toggleAI" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <p class="setting-description">
+                        Guards patrol, investigate, call backup, and take cover
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
