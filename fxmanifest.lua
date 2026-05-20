@@ -1,7 +1,7 @@
 fx_version 'cerulean'
 game 'gta5'
 
-author 'Unstable Development'
+author 'Niko'
 description 'Comprehensive NPC system: hunters, guards, patrols, bodyguards, scenarios, AI behaviors'
 version '3.1.0'
 
